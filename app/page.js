@@ -166,6 +166,7 @@ export default function Home() {
             md={6} 
             key={video.id}
             sx={{
+             
              animation: `slideInUp 0.6s ease-out ${index * 0.2}s both`,
             }}
           >
@@ -204,7 +205,7 @@ export default function Home() {
               <CardMedia
                 component="div"
                 sx={{
-                  height: 300,
+                  height: 250,
                   background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
                   display: 'flex',
                   alignItems: 'center',
