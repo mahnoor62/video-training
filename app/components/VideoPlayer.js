@@ -41,7 +41,13 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
     const videoElement = videoRef.current
     if (!videoElement) return
 
+    // Reset state when video changes
+    setCurrentTime(0)
+    setDuration(0)
+    setIsPlaying(true)
+
     const handleLoadedMetadata = () => {
+      console.log('Video metadata loaded, duration:', videoElement.duration)
       setDuration(videoElement.duration)
       // Auto-play the video when metadata is loaded
       videoElement.play().catch((error) => {
@@ -70,7 +76,7 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
       videoElement.removeEventListener('timeupdate', handleTimeUpdate)
       videoElement.removeEventListener('ended', handleEnded)
     }
-  }, [onComplete])
+  }, [onComplete, video])
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -151,12 +157,25 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
   }
 
   const formatTime = (time) => {
+    if (!time || isNaN(time)) return '0:00'
     const minutes = Math.floor(time / 60)
     const seconds = Math.floor(time % 60)
     return `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
 
-  const progress = duration > 0 ? (currentTime / duration) * 100 : 0
+  // Parse duration from video data if available
+  const parseDurationFromString = (durationString) => {
+    if (!durationString) return 0
+    const parts = durationString.split(':')
+    if (parts.length === 2) {
+      return parseInt(parts[0]) * 60 + parseInt(parts[1])
+    }
+    return 0
+  }
+
+  const fallbackDuration = parseDurationFromString(video.duration)
+
+  const progress = (duration || fallbackDuration) > 0 ? (currentTime / (duration || fallbackDuration)) * 100 : 0
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -170,41 +189,72 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
           startIcon={<ArrowBack />}
           onClick={onBack}
           variant="outlined"
-            sx={{ 
-              mb: 2,
-              backdropFilter: 'blur(15px)',
-              backgroundColor: 'rgba(139, 92, 246, 0.1)',
-              border: '2px solid #8b5cf6',
-              color: '#8b5cf6',
-              fontWeight: 600,
-              borderRadius: '12px',
-              padding: '12px 24px',
-              textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
-              '&:hover': {
-                backgroundColor: 'rgba(139, 92, 246, 0.2)',
-                transform: 'translateY(-3px)',
-                border: '2px solid #7c3aed',
-                color: '#7c3aed',
-                boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)',
-                textShadow: '0 1px 3px rgba(255, 255, 255, 0.7)',
-              }
-            }}
+          sx={{ 
+            mb: 2,
+            backdropFilter: 'blur(15px)',
+            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+            border: '2px solid #8b5cf6',
+            color: '#8b5cf6',
+            fontWeight: 600,
+            borderRadius: '12px',
+            padding: '12px 24px',
+            textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
+            '&:hover': {
+              backgroundColor: 'rgba(139, 92, 246, 0.2)',
+              transform: 'translateY(-3px)',
+              border: '2px solid #7c3aed',
+              color: '#7c3aed',
+              boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)',
+              textShadow: '0 1px 3px rgba(255, 255, 255, 0.7)',
+            }
+          }}
         >
           Back to Training
         </Button>
-        <Typography 
-          variant="h4" 
-          component="h1" 
-          gutterBottom
-          className="gradient-text"
-          sx={{ fontWeight: 600 }}
+        
+        <Box
+          sx={{
+            background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+            borderRadius: '12px',
+            padding: '20px 24px',
+            mb: 2,
+            width: '100%',
+            boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)',
+            position: 'relative',
+            overflow: 'hidden',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: '-100%',
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+              animation: 'shimmer 2s infinite',
+            }
+          }}
         >
-          {video.title}
-        </Typography>
+          <Typography
+            variant="h4"
+            component="h1" 
+            sx={{ 
+              fontWeight: 600,
+              color: 'white',
+              margin: 0,
+              textAlign: 'center',
+              textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+              filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
+              position: 'relative',
+              zIndex: 1
+            }}
+          >
+            {video.title}
+          </Typography>
+        </Box>
         <Typography variant="body1" sx={{ mb: 2, opacity: 0.9, color: '#e2e8f0' }}>
           {video.description}
         </Typography>
-        <Chip
+        {/* <Chip
           label={`Duration: ${video.duration}`}
           sx={{
             background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
@@ -214,7 +264,7 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
             borderRadius: '20px',
             border: '1px solid rgba(255, 255, 255, 0.2)',
           }}
-        />
+        /> */}
       </Box>
 
       <Card 
@@ -313,7 +363,7 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
               </Box>
 
               <Typography variant="body2" sx={{ color: 'white', minWidth: 100 }}>
-                {formatTime(currentTime)} / {formatTime(duration)}
+                {formatTime(currentTime)} / {formatTime(duration || fallbackDuration)}
               </Typography>
 
               <Box sx={{ flexGrow: 1 }} />

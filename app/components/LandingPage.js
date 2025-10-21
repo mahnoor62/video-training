@@ -26,17 +26,17 @@ export default function LandingPage({ onStartTraining }) {
 
   const features = [
     {
-      icon: <Security sx={{ fontSize: 40, color: '#8b5cf6' }} />,
+      icon: <Security sx={{ fontSize: 32, color: '#8b5cf6' }} />,
       title: "Firefighting Safety",
       description: "Learn essential firefighting techniques, safety protocols, and emergency response procedures to protect lives and property"
     },
     {
-      icon: <HealthAndSafety sx={{ fontSize: 40, color: '#8b5cf6' }} />,
+      icon: <HealthAndSafety sx={{ fontSize: 32, color: '#8b5cf6' }} />,
       title: "CPR & First Aid",
       description: "Master life-saving CPR techniques, first aid procedures, and emergency medical response skills"
     },
     {
-      icon: <TrendingUp sx={{ fontSize: 40, color: '#8b5cf6' }} />,
+      icon: <TrendingUp sx={{ fontSize: 32, color: '#8b5cf6' }} />,
       title: "Certified Training",
       description: "Professional certification in firefighting and CPR that meets industry standards and requirements"
     }
@@ -170,61 +170,68 @@ export default function LandingPage({ onStartTraining }) {
         {/* Features Section */}
         <Box
           sx={{
-            mb: 5,
+            mb: 4,
             animation: 'slideInUp 0.8s ease-out 1s both'
           }}
         >
           <Typography
-            variant="h3"
+            variant="h4"
             textAlign="center"
             // className="gradient-text"
             sx={{
               fontWeight: 700,
-              mb: 6
+              mb: 3,
+              fontSize: '1.8rem'
             }}
           >
             Why Choose Our Training?
           </Typography>
 
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 2 }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 1.5 }}>
             {features.map((feature, index) => (
               <Card
                 key={index}
                 sx={{
                   textAlign: 'center',
-                  p: 3,
+                  p: 2,
                   background: 'rgba(255, 255, 255, 0.95)',
                   backdropFilter: 'blur(20px)',
                   border: '1px solid rgba(139, 92, 246, 0.2)',
-                  borderRadius: '20px',
+                  borderRadius: '16px',
                   transition: 'all 0.3s ease',
                   animation: `slideInUp 0.6s ease-out ${1.2 + index * 0.1}s both`,
+                  maxWidth: 300,
+                  mx: 'auto',
                   '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: '0 20px 40px rgba(139, 92, 246, 0.25)',
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 15px 30px rgba(139, 92, 246, 0.2)',
                     border: '1px solid rgba(139, 92, 246, 0.4)',
                   }
                 }}
               >
-                <CardContent>
-                  <Box sx={{ mb: 2 }}>
-                    {feature.icon}
+                <CardContent sx={{ p: 1.5 }}>
+                  <Box sx={{ mb: 1.5 }}>
+                    <Box sx={{ fontSize: 32, color: '#8b5cf6' }}>
+                      {feature.icon}
+                    </Box>
                   </Box>
                   <Typography
-                    variant="h5"
+                    variant="h6"
                     sx={{
                       fontWeight: 600,
                       color: '#1e293b',
-                      mb: 2
+                      mb: 1.5,
+                      fontSize: '1.1rem'
                     }}
                   >
                     {feature.title}
                   </Typography>
                   <Typography
-                    variant="body1"
+                    variant="body2"
                     sx={{
                       color: '#475569',
-                      lineHeight: 1.6
+                      lineHeight: 1.5,
+                      fontSize: '0.85rem'
                     }}
                   >
                     {feature.description}

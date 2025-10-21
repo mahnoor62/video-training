@@ -28,6 +28,7 @@ import {
   TrendingUp,
   Assessment
 } from '@mui/icons-material'
+import AnimatedBackground from './AnimatedBackground'
 // Removed canvas-confetti to avoid SSR issues - using CSS animations instead
 
 export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
@@ -86,7 +87,17 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
   const isLastVideo = currentResult && currentResult.videoIndex === 1 // 0-based index, so 1 means second video
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
+    <Box sx={{
+      minHeight: '100vh',
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '1rem',
+      overflow: 'hidden'
+    }}>
+      <AnimatedBackground />
+      <Container maxWidth="lg" sx={{ py: 2, maxHeight: '100vh', overflow: 'hidden', position: 'relative', zIndex: 2 }}>
       {showConfetti && (
         <Box className="confetti-container">
           {Array.from({ length: 50 }).map((_, i) => (
@@ -136,23 +147,24 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
         </Button> */}
 
         <Typography 
-          variant="h3" 
+          variant="h4" 
           component="h1" 
           gutterBottom
           className="gradient-text"
           sx={{ 
             fontWeight: 700,
-            mb: 2,
+            mb: 1,
+            fontSize: '2rem',
             animation: 'pulse 2s infinite',
           }}
         >
           {currentVideo ? `${currentVideo.title} Complete!` : 'Training Complete!'}
         </Typography>
         <Typography 
-          variant="h6" 
+          variant="body1" 
           color="text.secondary" 
           sx={{ 
-            mb: 4,
+            mb: 2,
             opacity: 0.9,
             fontWeight: 400,
           }}
@@ -164,17 +176,17 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
       {/* Overall Score Card */}
       <Card 
         sx={{ 
-          mb: 4, 
+          mb: 2, 
           textAlign: 'center',
           animation: 'fadeInScale 0.8s ease-out 0.2s both',
         }}
       >
-        <CardContent sx={{ py: 6 }}>
+        <CardContent sx={{ py: 3 }}>
           <Box 
             sx={{ 
               display: 'flex', 
               justifyContent: 'center', 
-              mb: 3,
+              mb: 2,
               animation: 'float 3s ease-in-out infinite',
             }}
           >
@@ -182,13 +194,13 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
           </Box>
           
           <Typography 
-            variant="h2" 
+            variant="h3" 
             component="div" 
             className="gradient-text"
             gutterBottom
             sx={{
               fontWeight: 700,
-              fontSize: '4rem',
+              fontSize: '2.5rem',
               animation: 'pulse 2s infinite',
             }}
           >
@@ -196,21 +208,21 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
           </Typography>
           
           <Typography 
-            variant="h5" 
+            variant="h6" 
             gutterBottom
             sx={{ 
               fontWeight: 600,
-              mb: 2,
+              mb: 1,
             }}
           >
             {getScoreMessage()}
           </Typography>
           
           <Typography 
-            variant="body1" 
+            variant="body2" 
             color="text.secondary" 
             sx={{ 
-              mb: 3,
+              mb: 2,
               opacity: 0.8,
             }}
           >
@@ -221,9 +233,9 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
             variant="determinate"
             value={scorePercentage}
             sx={{ 
-              height: 16, 
-              borderRadius: 8, 
-              mb: 3,
+              height: 12, 
+              borderRadius: 6, 
+              mb: 2,
               backgroundColor: 'rgba(255, 255, 255, 0.2)',
               '& .MuiLinearProgress-bar': {
                 background: getScoreColor() === 'success'
@@ -231,16 +243,16 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
                   : getScoreColor() === 'warning'
                     ? 'linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%)'
                     : 'linear-gradient(90deg, #ef4444 0%, #f87171 100%)',
-                borderRadius: 8,
+                borderRadius: 6,
               }
             }}
           />
 
           <Chip
             label={`${score}/${totalQuestions} Correct`}
-            size="large"
+            size="medium"
             sx={{ 
-              fontSize: '1.2rem',
+              fontSize: '1rem',
               fontWeight: 600,
               background: getScoreColor() === 'success'
                 ? 'linear-gradient(135deg, #10b981 0%, #34d399 100%)'
@@ -248,14 +260,14 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
                   ? 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)'
                   : 'linear-gradient(135deg, #ef4444 0%, #f87171 100%)',
               color: 'white',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
             }}
           />
         </CardContent>
       </Card>
 
       {/* Detailed Results */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={2} sx={{ mb: 2 }}>
         {results.map((result, index) => {
           const videoTitle = `Video ${result.videoIndex + 1}: Training Module ${result.videoIndex + 1}`
           const videoScore = Math.round((result.score / result.totalQuestions) * 100)
@@ -279,10 +291,10 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
                   }
                 }}
               >
-                <CardContent>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                <CardContent sx={{ p: 2 }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                     <Typography 
-                      variant="h6" 
+                      variant="body1" 
                       component="h3"
                       sx={{ fontWeight: 600 }}
                     >
@@ -338,26 +350,27 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
       {/* Performance Summary */}
       <Paper 
         sx={{ 
-          p: 3, 
-          mb: 4,
+          p: 2, 
+          mb: 2,
           animation: 'slideInUp 0.6s ease-out 0.8s both',
         }}
       >
         <Typography 
-          variant="h5" 
+          variant="h6" 
           gutterBottom 
           sx={{ 
             display: 'flex', 
             alignItems: 'center', 
             gap: 1,
             fontWeight: 600,
+            mb: 1,
           }}
         >
           <Assessment />
           Performance Summary
         </Typography>
         
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <Box 
               sx={{ 
@@ -441,25 +454,26 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
         sx={{ 
           display: 'flex', 
           justifyContent: 'center', 
-          gap: 2,
+          gap: 1.5,
           animation: 'slideInUp 0.6s ease-out 1.4s both',
+          mt: 1,
         }}
       >
         {!isLastVideo && (
            <Button
              variant="outlined"
-             size="large"
+             size="medium"
              onClick={onNextVideo}
              startIcon={<PlayArrow />}
              sx={{ 
-               minWidth: 200,
+               minWidth: 180,
                border: '2px solid #10b981',
                color: '#10b981',
                backgroundColor: 'rgba(16, 185, 129, 0.1)',
                fontWeight: 700,
-               fontSize: '1.1rem',
-               padding: '16px 32px',
-               borderRadius: '16px',
+               fontSize: '1rem',
+               padding: '12px 24px',
+               borderRadius: '12px',
                textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
                '&:hover': {
                  backgroundColor: 'rgba(16, 185, 129, 0.2)',
@@ -477,18 +491,18 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
         
         <Button
           variant="outlined"
-          size="large"
+          size="medium"
           onClick={onBackToHome}
           startIcon={<Home />}
           sx={{ 
-            minWidth: 200,
+            minWidth: 180,
             border: '2px solid #8b5cf6',
             color: '#8b5cf6',
             backgroundColor: 'rgba(139, 92, 246, 0.1)',
             fontWeight: 700,
-            fontSize: '1.1rem',
-            padding: '16px 32px',
-            borderRadius: '16px',
+            fontSize: '1rem',
+            padding: '12px 24px',
+            borderRadius: '12px',
             textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
             '&:hover': {
               backgroundColor: 'rgba(139, 92, 246, 0.2)',
@@ -527,6 +541,7 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
           </Typography>
         </Alert>
       )}
-    </Container>
+      </Container>
+    </Box>
   )
 }
