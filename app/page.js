@@ -260,7 +260,7 @@ export default function Home() {
                     Start Training
                   </Typography>
                 </Box>
-                <Chip
+                {/* <Chip
                   label={video.duration}
                   size="small"
                   sx={{ 
@@ -278,7 +278,7 @@ export default function Home() {
                       transform: 'scale(1.05)',
                     }
                   }}
-                />
+                /> */}
               </CardMedia>
               <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: 3 }}>
                 <Typography 
