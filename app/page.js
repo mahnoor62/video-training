@@ -345,7 +345,7 @@ export default function Home() {
             variant="h4" 
             gutterBottom 
             textAlign="center"
-            className="gradient-text"
+            // className="gradient-text"
             sx={{ fontWeight: 600, mb: 3 }}
           >
             Training Progress

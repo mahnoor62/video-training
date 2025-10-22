@@ -376,22 +376,74 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
               sx={{ 
                 textAlign: 'center',
                 animation: 'slideInLeft 0.6s ease-out 1s both',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+                // minHeight: '120px'
               }}
             >
-              <Typography 
-                variant="h3" 
-                className="gradient-text"
-                sx={{ fontWeight: 700 }}
+              <Box
+                sx={{
+                  background: 'linear-gradient(135deg, #ff6b6b 0%, #8b5cf6 100%)',
+                  borderRadius: '8px',
+                  padding: '15px 20px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 6px 20px rgba(255, 107, 107, 0.3)',
+                  width: '100%',
+                  maxWidth: '200px',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                    borderRadius: '8px'
+                  }
+                }}
               >
-                {results.length}
-              </Typography>
-              <Typography 
-                variant="body2" 
-                color="text.secondary"
-                sx={{ fontWeight: 500 }}
-              >
-                Modules Completed
-              </Typography>
+                <Typography 
+                  variant="h3" 
+                  sx={{ 
+                    fontWeight: 700,
+                    color: 'white',
+                    textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+                    filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))',
+                    background: 'linear-gradient(45deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundSize: '200% 200%',
+                    animation: 'shimmer 2s ease-in-out infinite',
+                    letterSpacing: '-0.02em',
+                    position: 'relative',
+                    zIndex: 1,
+                    mb: 0.5,
+                    fontSize: '2rem'
+                  }}
+                >
+                  {results.length}
+                </Typography>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    color: 'white',
+                    fontWeight: 500,
+                    textShadow: '0 1px 5px rgba(0, 0, 0, 0.3)',
+                    filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.2))',
+                    opacity: 0.95,
+                    position: 'relative',
+                    zIndex: 1,
+                    fontSize: '0.8rem'
+                  }}
+                >
+                  Modules Completed
+                </Typography>
+              </Box>
             </Box>
           </Grid>
           
@@ -400,24 +452,73 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
               sx={{ 
                 textAlign: 'center',
                 animation: 'slideInUp 0.6s ease-out 1.1s both',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%'
               }}
             >
-              <Typography 
-                variant="h3" 
-                sx={{ 
-                  color: 'success.main',
-                  fontWeight: 700,
+              <Box
+                sx={{
+                  background: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)',
+                  borderRadius: '8px',
+                  padding: '15px 20px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 6px 20px rgba(16, 185, 129, 0.3)',
+                  width: '100%',
+                  maxWidth: '200px',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                    borderRadius: '8px'
+                  }
                 }}
               >
-                {score}
-              </Typography>
-              <Typography 
-                variant="body2" 
-                color="text.secondary"
-                sx={{ fontWeight: 500 }}
-              >
-                Questions Correct
-              </Typography>
+                <Typography 
+                  variant="h3" 
+                  sx={{ 
+                    fontWeight: 700,
+                    color: 'white',
+                    textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+                    filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))',
+                    background: 'linear-gradient(45deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundSize: '200% 200%',
+                    animation: 'shimmer 2s ease-in-out infinite',
+                    letterSpacing: '-0.02em',
+                    position: 'relative',
+                    zIndex: 1,
+                    mb: 0.5,
+                    fontSize: '2rem'
+                  }}
+                >
+                  {score}
+                </Typography>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    color: 'white',
+                    fontWeight: 500,
+                    textShadow: '0 1px 5px rgba(0, 0, 0, 0.3)',
+                    filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.2))',
+                    opacity: 0.95,
+                    position: 'relative',
+                    zIndex: 1,
+                    fontSize: '0.8rem'
+                  }}
+                >
+                  Questions Correct
+                </Typography>
+              </Box>
             </Box>
           </Grid>
           
@@ -426,24 +527,73 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
               sx={{ 
                 textAlign: 'center',
                 animation: 'slideInRight 0.6s ease-out 1.2s both',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%'
               }}
             >
-              <Typography 
-                variant="h3" 
-                sx={{ 
-                  color: 'primary.main',
-                  fontWeight: 700,
+              <Box
+                sx={{
+                  background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+                  borderRadius: '8px',
+                  padding: '15px 20px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 6px 20px rgba(139, 92, 246, 0.3)',
+                  width: '100%',
+                  maxWidth: '200px',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                    borderRadius: '8px'
+                  }
                 }}
               >
-                {totalQuestions}
-              </Typography>
-              <Typography 
-                variant="body2" 
-                color="text.secondary"
-                sx={{ fontWeight: 500 }}
-              >
-                Total Questions
-              </Typography>
+                <Typography 
+                  variant="h3" 
+                  sx={{ 
+                    fontWeight: 700,
+                    color: 'white',
+                    textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+                    filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))',
+                    background: 'linear-gradient(45deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundSize: '200% 200%',
+                    animation: 'shimmer 2s ease-in-out infinite',
+                    letterSpacing: '-0.02em',
+                    position: 'relative',
+                    zIndex: 1,
+                    mb: 0.5,
+                    fontSize: '2rem'
+                  }}
+                >
+                  {totalQuestions}
+                </Typography>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    color: 'white',
+                    fontWeight: 500,
+                    textShadow: '0 1px 5px rgba(0, 0, 0, 0.3)',
+                    filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.2))',
+                    opacity: 0.95,
+                    position: 'relative',
+                    zIndex: 1,
+                    fontSize: '0.8rem'
+                  }}
+                >
+                  Total Questions
+                </Typography>
+              </Box>
             </Box>
           </Grid>
         </Grid>

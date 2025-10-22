@@ -242,28 +242,68 @@ export default function LandingPage({ onStartTraining }) {
           </Box>
         </Box>
 
-        {/* Stats Section */}
+        {/* Stats Section - Strip Design */}
         <Box
           sx={{
             textAlign: 'center',
-            animation: 'slideInUp 0.8s ease-out 1.4s both'
+            animation: 'slideInUp 0.8s ease-out 1.4s both',
+            background: 'linear-gradient(135deg, #ff6b6b 0%, #8b5cf6 100%)',
+            borderRadius: '12px',
+            padding: '30px 20px',
+            margin: '40px 0',
+            position: 'relative',
+            overflow: 'hidden',
+            boxShadow: '0 10px 30px rgba(255, 107, 107, 0.3)',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+              borderRadius: '12px'
+            }
           }}
         >
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 6, flexWrap: 'wrap' }}>
+          <Box sx={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: { xs: 4, md: 8 },
+            flexWrap: 'wrap',
+            position: 'relative',
+            zIndex: 1,
+            alignItems: 'center'
+          }}>
             {stats.map((stat, index) => (
               <Box
                 key={index}
                 sx={{
                   textAlign: 'center',
-                  animation: `slideInUp 0.6s ease-out ${1.6 + index * 0.1}s both`
+                  animation: `slideInUp 0.6s ease-out ${1.6 + index * 0.1}s both`,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  minWidth: '120px'
                 }}
               >
                 <Typography
                   variant="h2"
-                  className="gradient-text"
                   sx={{
                     fontWeight: 800,
-                    mb: 1
+                    mb: 1,
+                    color: 'white',
+                    fontSize: { xs: '2rem', md: '2.5rem' },
+                    textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+                    filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))',
+                    background: 'linear-gradient(45deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundSize: '200% 200%',
+                    animation: 'shimmer 2s ease-in-out infinite',
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1
                   }}
                 >
                   {stat.number}
@@ -271,8 +311,14 @@ export default function LandingPage({ onStartTraining }) {
                 <Typography
                   variant="h6"
                   sx={{
-                    color: '#475569',
-                    fontWeight: 500
+                    color: 'white',
+                    fontWeight: 500,
+                    textShadow: '0 1px 5px rgba(0, 0, 0, 0.3)',
+                    filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.2))',
+                    fontSize: { xs: '0.9rem', md: '1rem' },
+                    letterSpacing: '0.5px',
+                    opacity: 0.95,
+                    lineHeight: 1.2
                   }}
                 >
                   {stat.label}

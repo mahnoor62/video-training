@@ -163,16 +163,70 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
           Back to Training
         </Button>
         
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-          <Typography 
-            variant="h4" 
-            component="h1"
-            className="gradient-text"
-            sx={{ fontWeight: 600 }}
+        <Box sx={{ 
+          display: 'flex', 
+          // flexDirection: 'column',
+          // alignItems: 'center',
+          gap: 2,
+          mb: 2 
+        }}>
+          {/* Quiz Assessment Strip - Centered */}
+          <Box
+            sx={{
+              background: 'linear-gradient(135deg, #ff6b6b 0%, #8b5cf6 100%)',
+              borderRadius: '12px',
+              padding: '15px 25px',
+              position: 'relative',
+              overflow: 'hidden',
+              boxShadow: '0 8px 25px rgba(255, 107, 107, 0.3)',
+              width: '100%',
+              maxWidth: '500px',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                borderRadius: '12px'
+              }
+            }}
           >
-            Quiz Assessment
-          </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Typography 
+              variant="h4" 
+              component="h1"
+              sx={{ 
+                fontWeight: 700,
+                color: 'white',
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+                filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))',
+                background: 'linear-gradient(45deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundSize: '200% 200%',
+                animation: 'shimmer 2s ease-in-out infinite',
+                letterSpacing: '-0.02em',
+                position: 'relative',
+                zIndex: 1,
+                fontSize: '2rem',
+                textAlign: 'center'
+              }}
+            >
+              Quiz Assessment
+            </Typography>
+          </Box>
+          
+          {/* Question and Timer Chips - Both at End */}
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'flex-end',
+            gap: 2,
+            width: '100%',
+            maxWidth: '500px'
+          }}>
             <Chip
               icon={<Quiz />}
               label={`Question ${currentQuestionIndex + 1} of ${quiz.questions.length}`}
@@ -183,6 +237,8 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                 boxShadow: '0 6px 20px rgba(139, 92, 246, 0.4)',
                 borderRadius: '20px',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
+                fontSize: '0.9rem',
+                height: '36px'
               }}
             />
             <Chip
@@ -199,6 +255,8 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                 animation: timeLeft <= 10 ? 'pulse 1s infinite' : 'none',
                 borderRadius: '20px',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
+                fontSize: '0.9rem',
+                height: '36px'
               }}
             />
           </Box>
