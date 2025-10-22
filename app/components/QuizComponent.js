@@ -210,7 +210,7 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                 letterSpacing: '-0.02em',
                 position: 'relative',
                 zIndex: 1,
-                fontSize: '2rem',
+                fontSize: '1.5rem',
                 textAlign: 'center'
               }}
             >
@@ -225,7 +225,8 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
             justifyContent: 'flex-end',
             gap: 2,
             width: '100%',
-            maxWidth: '500px'
+            maxWidth: '500px',
+            marginLeft: 'auto'
           }}>
             <Chip
               icon={<Quiz />}

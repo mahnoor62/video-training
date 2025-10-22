@@ -3,7 +3,7 @@ import CustomThemeProvider from './components/ThemeProvider'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
-
+// finish the zooming effecr at mobile or tablet
 export const metadata = {
   title: 'Video Training Application',
   description: 'Professional video training with interactive quizzes',
