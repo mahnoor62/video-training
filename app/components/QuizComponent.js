@@ -180,7 +180,7 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
               overflow: 'hidden',
               boxShadow: '0 8px 25px rgba(255, 107, 107, 0.3)',
               width: '100%',
-              maxWidth: '500px',
+              maxWidth: '300px',
               '&::before': {
                 content: '""',
                 position: 'absolute',
