@@ -140,24 +140,12 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
           startIcon={<ArrowBack />}
           onClick={onBack}
           variant="outlined"
+          className="crystal-button crystal-button-secondary"
           sx={{ 
             mb: 2,
-            backdropFilter: 'blur(15px)',
-            backgroundColor: 'rgba(139, 92, 246, 0.1)',
-            border: '2px solid #8b5cf6',
-            color: '#8b5cf6',
-            fontWeight: 600,
             borderRadius: '12px',
             padding: '12px 24px',
-            textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
-            '&:hover': {
-              backgroundColor: 'rgba(139, 92, 246, 0.2)',
-              transform: 'translateY(-3px)',
-              border: '2px solid #7c3aed',
-              color: '#7c3aed',
-              boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)',
-              textShadow: '0 1px 3px rgba(255, 255, 255, 0.7)',
-            }
+            fontWeight: 600,
           }}
         >
           Back to Training
@@ -173,12 +161,12 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
           {/* Quiz Assessment Strip - Centered */}
           <Box
             sx={{
-              background: 'linear-gradient(135deg, #ff6b6b 0%, #8b5cf6 100%)',
+              background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
               borderRadius: '12px',
               padding: '15px 25px',
               position: 'relative',
               overflow: 'hidden',
-              boxShadow: '0 8px 25px rgba(255, 107, 107, 0.3)',
+              boxShadow: '0 8px 25px rgba(227, 27, 35, 0.3)',
               width: '100%',
               maxWidth: '300px',
               '&::before': {
@@ -232,10 +220,10 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
               icon={<Quiz />}
               label={`Question ${currentQuestionIndex + 1} of ${quiz.questions.length}`}
               sx={{
-                background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+                background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
                 color: 'white',
                 fontWeight: 600,
-                boxShadow: '0 6px 20px rgba(139, 92, 246, 0.4)',
+                boxShadow: '0 6px 20px rgba(227, 27, 35, 0.4)',
                 borderRadius: '20px',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
                 fontSize: '0.9rem',
@@ -270,9 +258,9 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
             height: 12, 
             borderRadius: 6, 
             mb: 3,
-            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+            backgroundColor: 'rgba(227, 27, 35, 0.1)',
             '& .MuiLinearProgress-bar': {
-              background: 'linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%)',
+              background: 'linear-gradient(90deg, #e31b23 0%, #333092 100%)',
               borderRadius: 6,
             }
           }}
@@ -357,6 +345,10 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
           onClick={handlePreviousQuestion}
           disabled={currentQuestionIndex === 0}
           startIcon={<ArrowBack />}
+          className="crystal-button crystal-button-secondary"
+          sx={{
+            opacity: currentQuestionIndex === 0 ? 0.5 : 1,
+          }}
         >
           Previous
         </Button>
@@ -369,9 +361,9 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                 width: 12,
                 height: 12,
                 borderRadius: '50%',
-                backgroundColor: answers[index] !== undefined ? 'primary.main' : 'grey.300',
+                backgroundColor: answers[index] !== undefined ? '#e31b23' : 'grey.300',
                 border: currentQuestionIndex === index ? 2 : 0,
-                borderColor: 'primary.dark'
+                borderColor: '#333092'
               }}
             />
           ))}
@@ -383,6 +375,10 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
           disabled={selectedAnswer === ''}
           endIcon={isLastQuestion ? <CheckCircle /> : <ArrowForward />}
           size="large"
+          className="crystal-button crystal-button-primary"
+          sx={{
+            opacity: selectedAnswer === '' ? 0.5 : 1,
+          }}
         >
           {isLastQuestion ? 'Complete Quiz' : 'Next Question'}
         </Button>

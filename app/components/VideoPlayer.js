@@ -189,24 +189,12 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
           startIcon={<ArrowBack />}
           onClick={onBack}
           variant="outlined"
+          className="crystal-button crystal-button-secondary"
           sx={{ 
             mb: 2,
-            backdropFilter: 'blur(15px)',
-            backgroundColor: 'rgba(139, 92, 246, 0.1)',
-            border: '2px solid #8b5cf6',
-            color: '#8b5cf6',
-            fontWeight: 600,
             borderRadius: '12px',
             padding: '12px 24px',
-            textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
-            '&:hover': {
-              backgroundColor: 'rgba(139, 92, 246, 0.2)',
-              transform: 'translateY(-3px)',
-              border: '2px solid #7c3aed',
-              color: '#7c3aed',
-              boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)',
-              textShadow: '0 1px 3px rgba(255, 255, 255, 0.7)',
-            }
+            fontWeight: 600,
           }}
         >
           Back to Training
@@ -214,12 +202,12 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
         
         <Box
           sx={{
-            background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+            background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
             borderRadius: '12px',
             padding: '20px 24px',
             mb: 2,
             width: '100%',
-            boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)',
+            boxShadow: '0 8px 25px rgba(227, 27, 35, 0.3)',
             position: 'relative',
             overflow: 'hidden',
             '&::before': {
@@ -251,7 +239,7 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
             {video.title}
           </Typography>
         </Box>
-        <Typography variant="body1" sx={{ mb: 2, opacity: 0.9, color: '#e2e8f0' }}>
+        <Typography variant="body1" sx={{ mb: 2, opacity: 0.9, color: 'black' }}>
           {video.description}
         </Typography>
         {/* <Chip
@@ -332,7 +320,7 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
                   borderRadius: 3,
                   backgroundColor: 'rgba(255,255,255,0.3)',
                   '& .MuiLinearProgress-bar': {
-                    backgroundColor: '#1976d2'
+                    background: 'linear-gradient(90deg, #e31b23 0%, #333092 100%)'
                   }
                 }}
               />
@@ -357,7 +345,7 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
                   onChange={handleVolumeChange}
                   style={{
                     width: 60,
-                    accentColor: '#1976d2'
+                    accentColor: '#e31b23'
                   }}
                 />
               </Box>
@@ -377,11 +365,11 @@ export default function VideoPlayer({ video, onComplete, onBack }) {
 
         <CardContent>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="body2" sx={{ color: '#e2e8f0' }}>
+            <Typography variant="body2" sx={{ color: 'black' }}>
               Video {video.id} of 2
             </Typography>
             {videoCompleted && (
-              <Typography variant="body2" sx={{ fontWeight: 600, color: '#059669' }}>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#e31b23' }}>
                 ✓ Video Completed
               </Typography>
             )}

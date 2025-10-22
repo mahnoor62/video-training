@@ -75,9 +75,9 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(227, 27, 35, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(51, 48, 146, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(227, 27, 35, 0.05) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
 }
@@ -310,20 +310,20 @@ a {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 50%, #ec4899 100%);
+  background: linear-gradient(135deg, #e31b23 0%, #333092 50%, #e31b23 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  text-shadow: 0 0 30px rgba(227, 27, 35, 0.3);
   animation: gradientShift 3s ease-in-out infinite;
 }
 
 @keyframes gradientShift {
   0%, 100% {
-    background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 50%, #ec4899 100%);
+    background: linear-gradient(135deg, #e31b23 0%, #333092 50%, #e31b23 100%);
   }
   50% {
-    background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #a78bfa 100%);
+    background: linear-gradient(135deg, #333092 0%, #e31b23 50%, #333092 100%);
   }
 }
 
@@ -411,6 +411,83 @@ a {
   outline-offset: 2px;
 }
 
+/* Crystal Button Styles */
+.crystal-button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 16px !important;
+  color: #333092 !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 
+    0 8px 32px rgba(51, 48, 146, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.crystal-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.crystal-button:hover::before {
+  left: 100%;
+}
+
+.crystal-button:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 2px solid rgba(51, 48, 146, 0.4) !important;
+  color: #e31b23 !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 
+    0 12px 40px rgba(51, 48, 146, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7) !important;
+}
+
+.crystal-button:active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 
+    0 4px 20px rgba(51, 48, 146, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.crystal-button-primary {
+  background: linear-gradient(135deg, rgba(227, 27, 35, 0.1) 0%, rgba(51, 48, 146, 0.1) 100%) !important;
+  border: 2px solid rgba(227, 27, 35, 0.3) !important;
+  color: #e31b23 !important;
+}
+
+.crystal-button-primary:hover {
+  background: linear-gradient(135deg, rgba(227, 27, 35, 0.2) 0%, rgba(51, 48, 146, 0.2) 100%) !important;
+  border: 2px solid rgba(227, 27, 35, 0.5) !important;
+  color: #333092 !important;
+}
+
+.crystal-button-secondary {
+  background: linear-gradient(135deg, rgba(51, 48, 146, 0.1) 0%, rgba(227, 27, 35, 0.1) 100%) !important;
+  border: 2px solid rgba(51, 48, 146, 0.3) !important;
+  color: #333092 !important;
+}
+
+.crystal-button-secondary:hover {
+  background: linear-gradient(135deg, rgba(51, 48, 146, 0.2) 0%, rgba(227, 27, 35, 0.2) 100%) !important;
+  border: 2px solid rgba(51, 48, 146, 0.5) !important;
+  color: #e31b23 !important;
+}
+
 /* CSS-based confetti animation */
 .confetti-container {
   position: fixed;
@@ -426,27 +503,27 @@ a {
   position: absolute;
   width: 10px;
   height: 10px;
-  background: #8b5cf6;
+  background: #e31b23;
   animation: confetti-fall 3s linear infinite;
 }
 
 .confetti-piece:nth-child(2n) {
-  background: #a78bfa;
+  background: #333092;
   animation-delay: 0.1s;
 }
 
 .confetti-piece:nth-child(3n) {
-  background: #ec4899;
+  background: #e31b23;
   animation-delay: 0.2s;
 }
 
 .confetti-piece:nth-child(4n) {
-  background: #f472b6;
+  background: #333092;
   animation-delay: 0.3s;
 }
 
 .confetti-piece:nth-child(5n) {
-  background: #06b6d4;
+  background: #e31b23;
   animation-delay: 0.4s;
 }
 

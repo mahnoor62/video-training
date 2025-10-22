@@ -26,17 +26,17 @@ export default function LandingPage({ onStartTraining }) {
 
   const features = [
     {
-      icon: <Security sx={{ fontSize: 32, color: '#8b5cf6' }} />,
+      icon: <Security sx={{ fontSize: 32, color: '#e31b23' }} />,
       title: "Firefighting Safety",
       description: "Learn essential firefighting techniques, safety protocols, and emergency response procedures to protect lives and property"
     },
     {
-      icon: <HealthAndSafety sx={{ fontSize: 32, color: '#8b5cf6' }} />,
+      icon: <HealthAndSafety sx={{ fontSize: 32, color: '#333092' }} />,
       title: "CPR & First Aid",
       description: "Master life-saving CPR techniques, first aid procedures, and emergency medical response skills"
     },
     {
-      icon: <TrendingUp sx={{ fontSize: 32, color: '#8b5cf6' }} />,
+      icon: <TrendingUp sx={{ fontSize: 32, color: '#e31b23' }} />,
       title: "Certified Training",
       description: "Professional certification in firefighting and CPR that meets industry standards and requirements"
     }
@@ -78,19 +78,35 @@ export default function LandingPage({ onStartTraining }) {
               mb: 4
             }}
           >
-            <Avatar
+            <Box
               sx={{
-                width: 100,
-                height: 100,
-                background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
-                boxShadow: '0 20px 40px rgba(139, 92, 246, 0.3)',
+                width: 150,
+                height: 150,
+                background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
+                boxShadow: '0 20px 40px rgba(227, 27, 35, 0.3)',
                 animation: 'pulse 2s infinite',
                 border: '4px solid rgba(255, 255, 255, 0.2)',
-                backdropFilter: 'blur(20px)'
+                backdropFilter: 'blur(20px)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+                position: 'relative',
+                padding: '8px'
               }}
             >
-              <School sx={{ fontSize: 60, color: 'white' }} />
-            </Avatar>
+              <img 
+                src="/logo.png" 
+                alt="Training Center Logo"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  filter: 'brightness(0) invert(1)'
+                }}
+              />
+            </Box>
           </Box>
 
           <Typography
@@ -143,24 +159,15 @@ export default function LandingPage({ onStartTraining }) {
             startIcon={<PlayArrow />}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            className="crystal-button crystal-button-primary"
             sx={{
-              background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
-              color: 'white',
-              fontWeight: 700,
               mb:5,
               fontSize: '1.3rem',
               padding: '20px 40px',
               borderRadius: '20px',
-              boxShadow: '0 10px 30px rgba(139, 92, 246, 0.4)',
-              border: '2px solid rgba(255, 255, 255, 0.2)',
               transform: isHovered ? 'translateY(-5px) scale(1.05)' : 'translateY(0) scale(1)',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
               animation: 'slideInUp 0.8s ease-out 0.8s both',
-              '&:hover': {
-                background: 'linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%)',
-                boxShadow: '0 15px 40px rgba(139, 92, 246, 0.6)',
-                border: '2px solid rgba(255, 255, 255, 0.4)',
-              }
             }}
           >
             Start Training Now
@@ -196,7 +203,7 @@ export default function LandingPage({ onStartTraining }) {
                   p: 2,
                   background: 'rgba(255, 255, 255, 0.95)',
                   backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(139, 92, 246, 0.2)',
+                  border: '1px solid rgba(227, 27, 35, 0.2)',
                   borderRadius: '16px',
                   transition: 'all 0.3s ease',
                   animation: `slideInUp 0.6s ease-out ${1.2 + index * 0.1}s both`,
@@ -204,14 +211,14 @@ export default function LandingPage({ onStartTraining }) {
                   mx: 'auto',
                   '&:hover': {
                     transform: 'translateY(-5px)',
-                    boxShadow: '0 15px 30px rgba(139, 92, 246, 0.2)',
-                    border: '1px solid rgba(139, 92, 246, 0.4)',
+                    boxShadow: '0 15px 30px rgba(227, 27, 35, 0.2)',
+                    border: '1px solid rgba(227, 27, 35, 0.4)',
                   }
                 }}
               >
                 <CardContent sx={{ p: 1.5 }}>
                   <Box sx={{ mb: 1.5 }}>
-                    <Box sx={{ fontSize: 32, color: '#8b5cf6' }}>
+                    <Box sx={{ fontSize: 32 }}>
                       {feature.icon}
                     </Box>
                   </Box>
@@ -247,13 +254,13 @@ export default function LandingPage({ onStartTraining }) {
           sx={{
             textAlign: 'center',
             animation: 'slideInUp 0.8s ease-out 1.4s both',
-            background: 'linear-gradient(135deg, #ff6b6b 0%, #8b5cf6 100%)',
+            background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
             borderRadius: '12px',
             padding: '30px 20px',
             margin: '40px 0',
             position: 'relative',
             overflow: 'hidden',
-            boxShadow: '0 10px 30px rgba(255, 107, 107, 0.3)',
+            boxShadow: '0 10px 30px rgba(227, 27, 35, 0.3)',
             '&::before': {
               content: '""',
               position: 'absolute',

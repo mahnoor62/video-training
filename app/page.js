@@ -98,24 +98,12 @@ export default function Home() {
           startIcon={<ArrowBack />}
           onClick={() => setCurrentView('landing')}
           variant="outlined"
+          className="crystal-button crystal-button-secondary"
           sx={{
             mb: 2,
-            backdropFilter: 'blur(15px)',
-            backgroundColor: 'rgba(139, 92, 246, 0.1)',
-            border: '2px solid #8b5cf6',
-            color: '#8b5cf6',
-            fontWeight: 600,
             borderRadius: '12px',
             padding: '12px 24px',
-            textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
-            '&:hover': {
-              backgroundColor: 'rgba(139, 92, 246, 0.2)',
-              transform: 'translateY(-3px)',
-              border: '2px solid #7c3aed',
-              color: '#7c3aed',
-              boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)',
-              textShadow: '0 1px 3px rgba(255, 255, 255, 0.7)',
-            }
+            fontWeight: 600,
           }}
         >
           Back to Home
@@ -179,7 +167,7 @@ export default function Home() {
                 overflow: 'hidden',
                 background: 'rgba(255, 255, 255, 0.95)',
                 backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(139, 92, 246, 0.2)',
+                border: '1px solid rgba(227, 27, 35, 0.2)',
                 borderRadius: '24px',
                 '&::before': {
                   content: '""',
@@ -188,7 +176,7 @@ export default function Home() {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(167, 139, 250, 0.05) 100%)',
+                  background: 'linear-gradient(135deg, rgba(227, 27, 35, 0.05) 0%, rgba(51, 48, 146, 0.05) 100%)',
                   opacity: 0,
                   transition: 'opacity 0.3s ease',
                 },
@@ -197,16 +185,16 @@ export default function Home() {
                 },
                 '&:hover': {
                   transform: 'translateY(-12px) scale(1.03)',
-                  boxShadow: '0 25px 50px rgba(139, 92, 246, 0.25)',
-                  border: '1px solid rgba(139, 92, 246, 0.4)',
+                  boxShadow: '0 25px 50px rgba(227, 27, 35, 0.25)',
+                  border: '1px solid rgba(227, 27, 35, 0.4)',
                 }
               }}
             >
               <CardMedia
                 component="div"
+                onClick={() => handleStartVideo(index)}
                 sx={{
                   height: 250,
-                  background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -214,6 +202,8 @@ export default function Home() {
                   overflow: 'hidden',
                   borderTopLeftRadius: '24px',
                   borderTopRightRadius: '24px',
+                  backgroundColor: '#000',
+                  cursor: 'pointer',
                   '&::before': {
                     content: '""',
                     position: 'absolute',
@@ -221,17 +211,36 @@ export default function Home() {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: 'linear-gradient(45deg, rgba(255,255,255,0.2) 0%, transparent 100%)',
+                    background: 'linear-gradient(135deg, rgba(227, 27, 35, 0.7) 0%, rgba(51, 48, 146, 0.7) 100%)',
+                    zIndex: 1,
                   }
                 }}
               >
+                <video
+                  src={video.thumbnail}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: 0,
+                  }}
+                  muted
+                  preload="metadata"
+                  poster=""
+                />
                 <Box
+                  onClick={() => handleStartVideo(index)}
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     gap: 2,
-                    zIndex: 1,
+                    zIndex: 2,
+                    position: 'relative',
+                    cursor: 'pointer',
                   }}
                 >
                   <Box
@@ -264,6 +273,7 @@ export default function Home() {
                 {/* <Chip
                   label={video.duration}
                   size="small"
+                  onClick={(e) => e.stopPropagation()}
                   sx={{ 
                     position: 'absolute', 
                     bottom: 16, 
@@ -274,6 +284,8 @@ export default function Home() {
                     border: '1px solid rgba(255, 255, 255, 0.3)',
                     fontWeight: 600,
                     borderRadius: '20px',
+                    zIndex: 2,
+                    cursor: 'default',
                     '&:hover': {
                       backgroundColor: 'rgba(0, 0, 0, 0.9)',
                       transform: 'scale(1.05)',
@@ -312,17 +324,12 @@ export default function Home() {
                     fullWidth
                     onClick={() => handleStartVideo(index)}
                     startIcon={<PlayArrow />}
+                    className="crystal-button crystal-button-primary"
                     sx={{
-                      backgroundColor: '#8b5cf6',
-                      color: 'white',
-                      fontWeight: 700,
                       fontSize: '1.1rem',
                       padding: '16px 32px',
                       borderRadius: '16px',
-                      '&:hover': {
-                        backgroundColor: '#7c3aed',
-                        transform: 'translateY(-2px)',
-                      },
+                      fontWeight: 700,
                     }}
                   >
                     Start Training
@@ -345,7 +352,7 @@ export default function Home() {
             variant="h4" 
             gutterBottom 
             textAlign="center"
-            // className="gradient-text"
+            className="gradient-text"
             sx={{ fontWeight: 600, mb: 3 }}
           >
             Training Progress
@@ -357,12 +364,12 @@ export default function Home() {
               sx={{ 
                 height: 16, 
                 borderRadius: 10,
-                backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                border: '1px solid rgba(139, 92, 246, 0.2)',
+                backgroundColor: 'rgba(227, 27, 35, 0.1)',
+                border: '1px solid rgba(227, 27, 35, 0.2)',
                 '& .MuiLinearProgress-bar': {
-                  background: 'linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%)',
+                  background: 'linear-gradient(90deg, #e31b23 0%, #333092 100%)',
                   borderRadius: 10,
-                  boxShadow: '0 0 20px rgba(139, 92, 246, 0.5)',
+                  boxShadow: '0 0 20px rgba(227, 27, 35, 0.5)',
                 }
               }}
             />

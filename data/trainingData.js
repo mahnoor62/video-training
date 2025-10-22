@@ -6,7 +6,7 @@ export const trainingData = {
       description: "Learn essential firefighting techniques, safety protocols, and emergency response procedures to protect lives and property.",
       videoUrl: "/videos/firefighting-training.mp4",
       duration: "12:45",
-      thumbnail: "/api/placeholder/800/450"
+      thumbnail: "/videos/firefighting-training.mp4"
     },
     {
       id: 2,
@@ -14,7 +14,7 @@ export const trainingData = {
       description: "Master life-saving CPR techniques, first aid procedures, and emergency medical response skills.",
       videoUrl: "/videos/cpr-training.mp4",
       duration: "18:30",
-      thumbnail: "/api/placeholder/800/450"
+      thumbnail: "/videos/cpr-training.mp4"
     }
   ],
   quizzes: [

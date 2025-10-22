@@ -386,12 +386,12 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
             >
               <Box
                 sx={{
-                  background: 'linear-gradient(135deg, #ff6b6b 0%, #8b5cf6 100%)',
+                  background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
                   borderRadius: '8px',
                   padding: '15px 20px',
                   position: 'relative',
                   overflow: 'hidden',
-                  boxShadow: '0 6px 20px rgba(255, 107, 107, 0.3)',
+                  boxShadow: '0 6px 20px rgba(227, 27, 35, 0.3)',
                   width: '100%',
                   maxWidth: '200px',
                   '&::before': {
@@ -536,12 +536,12 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
             >
               <Box
                 sx={{
-                  background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+                  background: 'linear-gradient(135deg, #333092 0%, #e31b23 100%)',
                   borderRadius: '8px',
                   padding: '15px 20px',
                   position: 'relative',
                   overflow: 'hidden',
-                  boxShadow: '0 6px 20px rgba(139, 92, 246, 0.3)',
+                  boxShadow: '0 6px 20px rgba(51, 48, 146, 0.3)',
                   width: '100%',
                   maxWidth: '200px',
                   '&::before': {
@@ -615,24 +615,13 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
              size="medium"
              onClick={onNextVideo}
              startIcon={<PlayArrow />}
+             className="crystal-button crystal-button-primary"
              sx={{ 
                minWidth: 180,
-               border: '2px solid #10b981',
-               color: '#10b981',
-               backgroundColor: 'rgba(16, 185, 129, 0.1)',
-               fontWeight: 700,
                fontSize: '1rem',
                padding: '12px 24px',
                borderRadius: '12px',
-               textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
-               '&:hover': {
-                 backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                 border: '2px solid #059669',
-                 color: '#059669',
-                 transform: 'translateY(-3px) scale(1.02)',
-                 boxShadow: '0 8px 25px rgba(16, 185, 129, 0.3)',
-                 textShadow: '0 1px 3px rgba(255, 255, 255, 0.7)',
-               },
+               fontWeight: 700,
              }}
            >
              Next Training
@@ -644,24 +633,13 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
           size="medium"
           onClick={onBackToHome}
           startIcon={<Home />}
+          className="crystal-button crystal-button-secondary"
           sx={{ 
             minWidth: 180,
-            border: '2px solid #8b5cf6',
-            color: '#8b5cf6',
-            backgroundColor: 'rgba(139, 92, 246, 0.1)',
-            fontWeight: 700,
             fontSize: '1rem',
             padding: '12px 24px',
             borderRadius: '12px',
-            textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
-            '&:hover': {
-              backgroundColor: 'rgba(139, 92, 246, 0.2)',
-              border: '2px solid #7c3aed',
-              color: '#7c3aed',
-              transform: 'translateY(-3px) scale(1.02)',
-              boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)',
-              textShadow: '0 1px 3px rgba(255, 255, 255, 0.7)',
-            },
+            fontWeight: 700,
           }}
         >
           {isLastVideo ? 'Complete Training' : 'Back to Home'}
