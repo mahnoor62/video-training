@@ -95,13 +95,13 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
       minHeight: '100vh',
       position: 'relative',
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'center',
       padding: '1rem',
-      overflow: 'hidden'
+      overflow: 'auto'
     }}>
       <AnimatedBackground />
-      <Container maxWidth="lg" sx={{ py: 2, maxHeight: '100vh', overflow: 'hidden', position: 'relative', zIndex: 2 }}>
+      <Container maxWidth="lg" sx={{ py: 2, position: 'relative', zIndex: 2, width: '100%' }}>
       {showConfetti && (
         <Box className="confetti-container">
           {Array.from({ length: 50 }).map((_, i) => (
@@ -273,7 +273,7 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
       {/* Detailed Results */}
       <Grid container spacing={2} sx={{ mb: 2 }}>
         {results.map((result, index) => {
-          const videoTitle = `Video ${result.videoIndex + 1}: Training Module ${result.videoIndex + 1}`
+          const videoTitle = `Video${result.videoIndex + 1}:Training Module ${result.videoIndex + 1}`
           const videoScore = Math.round((result.score / result.totalQuestions) * 100)
           
           return (
@@ -298,7 +298,7 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
                 <CardContent sx={{ p: 2 }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                     <Typography 
-                      variant="body1" 
+                      variant="body2" 
                       component="h3"
                       sx={{ fontWeight: 600 }}
                     >
@@ -307,6 +307,7 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
                     <Chip
                       label={`${videoScore}%`}
                       sx={{
+                      
                         background: videoScore >= 80 
                           ? 'linear-gradient(135deg, #10b981 0%, #34d399 100%)'
                           : videoScore >= 60
@@ -705,17 +706,33 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 9999,
-            padding: 2
+            padding: { xs: 1, sm: 2 },
+            overflow: 'auto',
+            WebkitOverflowScrolling: 'touch'
           }}
           onClick={() => setShowAnswers(false)}
         >
           <Card
             sx={{
               maxWidth: '800px',
-              maxHeight: '80vh',
+              maxHeight: '90vh',
               overflow: 'auto',
               width: '100%',
-              animation: 'fadeInScale 0.3s ease-out'
+              animation: 'fadeInScale 0.3s ease-out',
+              '&::-webkit-scrollbar': {
+                width: '6px',
+              },
+              '&::-webkit-scrollbar-track': {
+                background: '#f1f1f1',
+                borderRadius: '3px',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
+                borderRadius: '3px',
+              },
+              '&::-webkit-scrollbar-thumb:hover': {
+                background: 'linear-gradient(135deg, #c41e3a 0%, #2a2a7a 100%)',
+              }
             }}
             onClick={(e) => e.stopPropagation()}
           >
