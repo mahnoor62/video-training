@@ -770,122 +770,170 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
             </Box>
             
             <Box sx={{ p: 2 }}>
-              {currentResult && (() => {
-                const quiz = trainingData.quizzes.find(q => q.videoId === currentResult.videoIndex + 1)
+              {results.map((result, resultIndex) => {
+                const quiz = trainingData.quizzes.find(q => q.videoId === result.videoIndex + 1)
                 if (!quiz) return null
                 
-                return quiz.questions.map((question, index) => {
-                  const userAnswer = currentResult.answers ? currentResult.answers[index] : null
-                  const userAnswerIndex = userAnswer ? userAnswer.charCodeAt(0) - 65 : -1
-                  const isCorrect = userAnswerIndex === question.correctAnswer
-                  
-                  return (
-                    <Card key={question.id} sx={{ mb: 2, p: 2 }}>
-                      <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-                        Question {index + 1}: {question.question}
-                      </Typography>
-                      
-                      <Box sx={{ mb: 2 }}>
-                        {question.options.map((option, optionIndex) => {
-                          const alphabetLabel = String.fromCharCode(65 + optionIndex)
-                          const isCorrectOption = optionIndex === question.correctAnswer
-                          const isUserOption = optionIndex === userAnswerIndex
-                          
-                          return (
-                            <Box
-                              key={optionIndex}
-                              sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: 2,
-                                p: 1.5,
-                                mb: 1,
-                                borderRadius: '8px',
-                                backgroundColor: isCorrectOption 
-                                  ? 'rgba(16, 185, 129, 0.1)' 
-                                  : isUserOption && !isCorrect
-                                  ? 'rgba(239, 68, 68, 0.1)'
-                                  : 'rgba(243, 244, 246, 0.5)',
-                                border: isCorrectOption 
-                                  ? '2px solid #10b981'
-                                  : isUserOption && !isCorrect
-                                  ? '2px solid #ef4444'
-                                  : '1px solid #e5e7eb'
-                              }}
-                            >
-                              <Box
-                                sx={{
-                                  width: 28,
-                                  height: 28,
-                                  borderRadius: '50%',
-                                  background: isCorrectOption 
-                                    ? 'linear-gradient(135deg, #10b981 0%, #34d399 100%)'
-                                    : isUserOption && !isCorrect
-                                    ? 'linear-gradient(135deg, #ef4444 0%, #f87171 100%)'
-                                    : 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  color: 'white',
-                                  fontWeight: 700,
-                                  fontSize: '0.8rem'
-                                }}
-                              >
-                                {alphabetLabel}
-                              </Box>
-                              <Typography variant="body1" sx={{ flex: 1 }}>
-                                {option}
-                              </Typography>
-                              {isCorrectOption && (
-                                <CheckCircle sx={{ color: '#10b981' }} />
-                              )}
-                              {isUserOption && !isCorrect && (
-                                <Cancel sx={{ color: '#ef4444' }} />
-                              )}
-                            </Box>
-                          )
-                        })}
-                      </Box>
-                      
-                      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                          Your Answer: 
-                        </Typography>
-                        {userAnswer ? (
-                          <Chip
-                            label={userAnswer}
-                            sx={{
-                              backgroundColor: isCorrect ? '#10b981' : '#ef4444',
-                              color: 'white',
-                              fontWeight: 600
-                            }}
-                          />
-                        ) : (
-                          <Chip
-                            label="Not answered"
-                            sx={{
-                              backgroundColor: '#6b7280',
-                              color: 'white',
-                              fontWeight: 600
-                            }}
-                          />
-                        )}
-                        <Typography variant="body2" sx={{ fontWeight: 600, ml: 1 }}>
-                          Correct Answer: 
+                const moduleTitle = result.videoIndex === 0 ? "Firefighting Safety Training" : "CPR Training"
+                const moduleScore = Math.round((result.score / result.totalQuestions) * 100)
+                
+                return (
+                  <Box key={result.videoId} sx={{ mb: 4 }}>
+                    {/* Module Header */}
+                    <Box
+                      sx={{
+                        background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
+                        borderRadius: '12px',
+                        padding: '16px 20px',
+                        mb: 3,
+                        position: 'relative',
+                        overflow: 'hidden',
+                        '&::before': {
+                          content: '""',
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                          borderRadius: '12px'
+                        }
+                      }}
+                    >
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1 }}>
+                        <Typography variant="h5" sx={{ color: 'white', fontWeight: 700 }}>
+                          Module {result.videoIndex + 1}: {moduleTitle}
                         </Typography>
                         <Chip
-                          label={String.fromCharCode(65 + question.correctAnswer)}
+                          label={`${moduleScore}%`}
                           sx={{
-                            backgroundColor: '#10b981',
+                            background: 'rgba(255, 255, 255, 0.2)',
                             color: 'white',
-                            fontWeight: 600
+                            fontWeight: 600,
+                            border: '1px solid rgba(255, 255, 255, 0.3)'
                           }}
                         />
                       </Box>
-                    </Card>
-                  )
-                })
-              })()}
+                      <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.9)', mt: 1, position: 'relative', zIndex: 1 }}>
+                        {result.score} out of {result.totalQuestions} questions correct
+                      </Typography>
+                    </Box>
+                    
+                    {/* Questions for this module */}
+                    {quiz.questions.map((question, index) => {
+                      const userAnswer = result.answers ? result.answers[index] : null
+                      const userAnswerIndex = userAnswer ? userAnswer.charCodeAt(0) - 65 : -1
+                      const isCorrect = userAnswerIndex === question.correctAnswer
+                      
+                      return (
+                        <Card key={question.id} sx={{ mb: 2, p: 2 }}>
+                          <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+                            Question {index + 1}: {question.question}
+                          </Typography>
+                          
+                          <Box sx={{ mb: 2 }}>
+                            {question.options.map((option, optionIndex) => {
+                              const alphabetLabel = String.fromCharCode(65 + optionIndex)
+                              const isCorrectOption = optionIndex === question.correctAnswer
+                              const isUserOption = optionIndex === userAnswerIndex
+                              
+                              return (
+                                <Box
+                                  key={optionIndex}
+                                  sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 2,
+                                    p: 1.5,
+                                    mb: 1,
+                                    borderRadius: '8px',
+                                    backgroundColor: isCorrectOption 
+                                      ? 'rgba(16, 185, 129, 0.1)' 
+                                      : isUserOption && !isCorrect
+                                      ? 'rgba(239, 68, 68, 0.1)'
+                                      : 'rgba(243, 244, 246, 0.5)',
+                                    border: isCorrectOption 
+                                      ? '2px solid #10b981'
+                                      : isUserOption && !isCorrect
+                                      ? '2px solid #ef4444'
+                                      : '1px solid #e5e7eb'
+                                  }}
+                                >
+                                  <Box
+                                    sx={{
+                                      width: 28,
+                                      height: 28,
+                                      borderRadius: '50%',
+                                      background: isCorrectOption 
+                                        ? 'linear-gradient(135deg, #10b981 0%, #34d399 100%)'
+                                        : isUserOption && !isCorrect
+                                        ? 'linear-gradient(135deg, #ef4444 0%, #f87171 100%)'
+                                        : 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                      color: 'white',
+                                      fontWeight: 700,
+                                      fontSize: '0.8rem'
+                                    }}
+                                  >
+                                    {alphabetLabel}
+                                  </Box>
+                                  <Typography variant="body1" sx={{ flex: 1 }}>
+                                    {option}
+                                  </Typography>
+                                  {isCorrectOption && (
+                                    <CheckCircle sx={{ color: '#10b981' }} />
+                                  )}
+                                  {isUserOption && !isCorrect && (
+                                    <Cancel sx={{ color: '#ef4444' }} />
+                                  )}
+                                </Box>
+                              )
+                            })}
+                          </Box>
+                          
+                          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+                            <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                              Your Answer: 
+                            </Typography>
+                            {userAnswer ? (
+                              <Chip
+                                label={userAnswer}
+                                sx={{
+                                  backgroundColor: isCorrect ? '#10b981' : '#ef4444',
+                                  color: 'white',
+                                  fontWeight: 600
+                                }}
+                              />
+                            ) : (
+                              <Chip
+                                label="Not answered"
+                                sx={{
+                                  backgroundColor: '#6b7280',
+                                  color: 'white',
+                                  fontWeight: 600
+                                }}
+                              />
+                            )}
+                            <Typography variant="body2" sx={{ fontWeight: 600, ml: 1 }}>
+                              Correct Answer: 
+                            </Typography>
+                            <Chip
+                              label={String.fromCharCode(65 + question.correctAnswer)}
+                              sx={{
+                                backgroundColor: '#10b981',
+                                color: 'white',
+                                fontWeight: 600
+                              }}
+                            />
+                          </Box>
+                        </Card>
+                      )
+                    })}
+                  </Box>
+                )
+              })}
             </Box>
           </Card>
         </Box>
