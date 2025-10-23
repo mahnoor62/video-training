@@ -82,18 +82,11 @@ export default function LandingPage({ onStartTraining }) {
               sx={{
                 width: 150,
                 height: 150,
-                background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
-                boxShadow: '0 20px 40px rgba(227, 27, 35, 0.3)',
-                animation: 'pulse 2s infinite',
-                border: '4px solid rgba(255, 255, 255, 0.2)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
-                position: 'relative',
-                padding: '8px'
+                position: 'relative'
               }}
             >
               <img 
@@ -102,26 +95,26 @@ export default function LandingPage({ onStartTraining }) {
                 style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'contain',
-                  filter: 'brightness(0) invert(1)'
+                  objectFit: 'contain'
                 }}
               />
             </Box>
           </Box>
 
           <Typography
-            variant="h1"
-            component="h1"
+            variant="h2"
+            component="h2"
             className="gradient-text"
             sx={{
               fontWeight: 800,
               fontSize: { xs: '3rem', md: '4.5rem' },
               letterSpacing: '-0.02em',
-              mb: 2,
+              mb: 10,
               animation: 'slideInUp 0.8s ease-out 0.2s both'
             }}
           >
-              Professional Training Center
+             Petrogas E&P Interactive Virtual Training 
+             Start
           </Typography>
 
           {/* <Typography
@@ -137,7 +130,7 @@ export default function LandingPage({ onStartTraining }) {
             Professional Safety & Emergency Response Training
           </Typography> */}
 
-          <Typography
+          {/* <Typography
             variant="h6"
             sx={{
               color: '#475569',
@@ -149,7 +142,7 @@ export default function LandingPage({ onStartTraining }) {
             }}
           >
           Enhance your skills with our comprehensive video training program
-          </Typography>
+          </Typography> */}
 
           {/* Start Now Button */}
           <Button
@@ -170,12 +163,12 @@ export default function LandingPage({ onStartTraining }) {
               animation: 'slideInUp 0.8s ease-out 0.8s both',
             }}
           >
-            Start Training Now
+            Start Training
           </Button>
         </Box>
 
         {/* Features Section */}
-        <Box
+        {/* <Box
           sx={{
             mb: 4,
             animation: 'slideInUp 0.8s ease-out 1s both'
@@ -247,10 +240,10 @@ export default function LandingPage({ onStartTraining }) {
               </Card>
             ))}
           </Box>
-        </Box>
+        </Box> */}
 
         {/* Stats Section - Strip Design */}
-        <Box
+        {/* <Box
           sx={{
             textAlign: 'center',
             animation: 'slideInUp 0.8s ease-out 1.4s both',
@@ -333,7 +326,7 @@ export default function LandingPage({ onStartTraining }) {
               </Box>
             ))}
           </Box>
-        </Box>
+        </Box> */}
 
         {/* Trust Indicators */}
         {/* <Box

@@ -10,7 +10,7 @@ export const trainingData = {
     },
     {
       id: 2,
-      title: "CPR & First Aid Training",
+      title: "CPR",
       description: "Master life-saving CPR techniques, first aid procedures, and emergency medical response skills.",
       videoUrl: "/videos/cpr-training.mp4",
       duration: "18:30",

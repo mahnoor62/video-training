@@ -89,14 +89,15 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
   const calculateScore = (finalAnswers) => {
     let score = 0
     const results = quiz.questions.map((question, index) => {
-      const userAnswer = parseInt(finalAnswers[index])
-      const isCorrect = userAnswer === question.correctAnswer
+      const userAnswer = finalAnswers[index] // Keep as alphabetic label (A, B, C, D)
+      const userAnswerIndex = userAnswer ? userAnswer.charCodeAt(0) - 65 : -1 // Convert A,B,C,D to 0,1,2,3
+      const isCorrect = userAnswerIndex === question.correctAnswer
       if (isCorrect) score++
       
       return {
         questionId: question.id,
         question: question.question,
-        userAnswer,
+        userAnswer: userAnswerIndex,
         correctAnswer: question.correctAnswer,
         isCorrect,
         options: question.options
@@ -148,7 +149,7 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
             fontWeight: 600,
           }}
         >
-          Back to Training
+          Back
         </Button>
         
         <Box sx={{ 
@@ -293,47 +294,81 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
               onChange={handleAnswerChange}
               sx={{ gap: 2 }}
             >
-              {currentQuestion.options.map((option, index) => (
-                <Card
-                  key={index}
-                  sx={{
-                    border: selectedAnswer === index.toString() ? 2 : 1,
-                    borderColor: selectedAnswer === index.toString() 
-                      ? 'primary.main' 
-                      : 'rgba(255, 255, 255, 0.2)',
-                    background: selectedAnswer === index.toString() 
-                      ? 'linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)'
-                      : 'rgba(255, 255, 255, 0.95)',
-                    backdropFilter: 'blur(10px)',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                    animation: `slideInLeft 0.4s ease-out ${index * 0.1}s both`,
-                      '&:hover': {
-                        borderColor: 'primary.main',
-                        background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)',
-                        transform: 'translateY(-2px)',
-                        boxShadow: '0 8px 25px rgba(37, 99, 235, 0.2)',
-                      }
-                  }}
-                >
-                  <FormControlLabel
-                    value={index.toString()}
-                    control={<Radio />}
-                    label={
-                      <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                        {option}
-                      </Typography>
-                    }
+              {currentQuestion.options.map((option, index) => {
+                const alphabetLabel = String.fromCharCode(65 + index) // A, B, C, D
+                return (
+                  <Card
+                    key={index}
                     sx={{
-                      width: '100%',
-                      m: 0,
-                      p: 2,
-                      '& .MuiFormControlLabel-label': {
-                        width: '100%'
-                      }
+                      border: selectedAnswer === alphabetLabel ? 2 : 1,
+                      borderColor: selectedAnswer === alphabetLabel 
+                        ? 'primary.main' 
+                        : 'rgba(255, 255, 255, 0.2)',
+                      background: selectedAnswer === alphabetLabel 
+                        ? 'linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)'
+                        : 'rgba(255, 255, 255, 0.95)',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      animation: `slideInLeft 0.4s ease-out ${index * 0.1}s both`,
+                        '&:hover': {
+                          borderColor: 'primary.main',
+                          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)',
+                          transform: 'translateY(-2px)',
+                          boxShadow: '0 8px 25px rgba(37, 99, 235, 0.2)',
+                        }
                     }}
-                  />
-                </Card>
-              ))}
+                  >
+                    <FormControlLabel
+                      value={alphabetLabel}
+                      control={
+                        <Radio 
+                          sx={{
+                            '& .MuiSvgIcon-root': {
+                              fontSize: 0, // Hide the default radio icon
+                            },
+                            '&:before': {
+                              content: `"${alphabetLabel}"`,
+                              width: 24,
+                              height: 24,
+                              borderRadius: '50%',
+                              background: selectedAnswer === alphabetLabel 
+                                ? 'linear-gradient(135deg, #e31b23 0%, #333092 100%)'
+                                : 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              color: selectedAnswer === alphabetLabel ? 'white' : '#64748b',
+                              fontWeight: 700,
+                              fontSize: '0.9rem',
+                              border: selectedAnswer === alphabetLabel 
+                                ? '2px solid #e31b23' 
+                                : '2px solid #e2e8f0',
+                              transition: 'all 0.3s ease',
+                              position: 'absolute',
+                              top: '50%',
+                              left: '50%',
+                              transform: 'translate(-50%, -50%)'
+                            }
+                          }}
+                        />
+                      }
+                      label={
+                        <Typography variant="body1" sx={{ fontWeight: 500, ml: 1 }}>
+                          {option}
+                        </Typography>
+                      }
+                      sx={{
+                        width: '100%',
+                        m: 0,
+                        p: 2,
+                        '& .MuiFormControlLabel-label': {
+                          width: '100%'
+                        }
+                      }}
+                    />
+                  </Card>
+                )
+              })}
             </RadioGroup>
           </FormControl>
         </CardContent>

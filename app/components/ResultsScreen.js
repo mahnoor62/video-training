@@ -26,18 +26,22 @@ import {
   PlayArrow,
   EmojiEvents,
   TrendingUp,
-  Assessment
+  Assessment,
+  Visibility,
+  Close
 } from '@mui/icons-material'
 import AnimatedBackground from './AnimatedBackground'
+import { trainingData } from '../../data/trainingData'
 // Removed canvas-confetti to avoid SSR issues - using CSS animations instead
 
 export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
   const [showConfetti, setShowConfetti] = useState(false)
+  const [showAnswers, setShowAnswers] = useState(false)
 
   // Get the most recent result (current video)
   const currentResult = results[results.length - 1]
   const currentVideo = currentResult ? {
-    title: currentResult.videoIndex === 0 ? "Firefighting Safety Training" : "CPR & First Aid Training",
+    title: currentResult.videoIndex === 0 ? "Firefighting Safety Training" : "CPR Training",
     index: currentResult.videoIndex + 1
   } : null
 
@@ -631,6 +635,23 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
         <Button
           variant="outlined"
           size="medium"
+          onClick={() => setShowAnswers(true)}
+          startIcon={<Visibility />}
+          className="crystal-button crystal-button-secondary"
+          sx={{ 
+            minWidth: 180,
+            fontSize: '1rem',
+            padding: '12px 24px',
+            borderRadius: '12px',
+            fontWeight: 700,
+          }}
+        >
+          Show Correct Answers
+        </Button>
+        
+        <Button
+          variant="outlined"
+          size="medium"
           onClick={onBackToHome}
           startIcon={<Home />}
           className="crystal-button crystal-button-secondary"
@@ -665,9 +686,192 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
       {!isExcellentScore && (
         <Alert severity="warning" sx={{ mt: 3 }}>
           <Typography variant="h6">
-            📚 Good effort! Consider reviewing the materials to improve your understanding.
+            📚 Good effort! Consider reviewing the video to improve your understanding.
           </Typography>
         </Alert>
+      )}
+
+      {/* Correct Answers Modal */}
+      {showAnswers && (
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+            padding: 2
+          }}
+          onClick={() => setShowAnswers(false)}
+        >
+          <Card
+            sx={{
+              maxWidth: '800px',
+              maxHeight: '80vh',
+              overflow: 'auto',
+              width: '100%',
+              animation: 'fadeInScale 0.3s ease-out'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                p: 2,
+                borderBottom: '1px solid #e0e0e0'
+              }}
+            >
+              <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                Correct Answers Review
+              </Typography>
+              <Button
+                onClick={() => setShowAnswers(false)}
+                startIcon={<Close />}
+                sx={{ 
+                  minWidth: 'auto',
+                  background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
+                  color: 'white',
+                  fontWeight: 600,
+                  borderRadius: '8px',
+                  padding: '8px 16px',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #c41e3a 0%, #2a2a7a 100%)',
+                    transform: 'translateY(-1px)',
+                    boxShadow: '0 4px 12px rgba(227, 27, 35, 0.3)'
+                  }
+                }}
+              >
+                Close
+              </Button>
+            </Box>
+            
+            <Box sx={{ p: 2 }}>
+              {currentResult && (() => {
+                const quiz = trainingData.quizzes.find(q => q.videoId === currentResult.videoIndex + 1)
+                if (!quiz) return null
+                
+                return quiz.questions.map((question, index) => {
+                  const userAnswer = currentResult.answers ? currentResult.answers[index] : null
+                  const userAnswerIndex = userAnswer ? userAnswer.charCodeAt(0) - 65 : -1
+                  const isCorrect = userAnswerIndex === question.correctAnswer
+                  
+                  return (
+                    <Card key={question.id} sx={{ mb: 2, p: 2 }}>
+                      <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+                        Question {index + 1}: {question.question}
+                      </Typography>
+                      
+                      <Box sx={{ mb: 2 }}>
+                        {question.options.map((option, optionIndex) => {
+                          const alphabetLabel = String.fromCharCode(65 + optionIndex)
+                          const isCorrectOption = optionIndex === question.correctAnswer
+                          const isUserOption = optionIndex === userAnswerIndex
+                          
+                          return (
+                            <Box
+                              key={optionIndex}
+                              sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 2,
+                                p: 1.5,
+                                mb: 1,
+                                borderRadius: '8px',
+                                backgroundColor: isCorrectOption 
+                                  ? 'rgba(16, 185, 129, 0.1)' 
+                                  : isUserOption && !isCorrect
+                                  ? 'rgba(239, 68, 68, 0.1)'
+                                  : 'rgba(243, 244, 246, 0.5)',
+                                border: isCorrectOption 
+                                  ? '2px solid #10b981'
+                                  : isUserOption && !isCorrect
+                                  ? '2px solid #ef4444'
+                                  : '1px solid #e5e7eb'
+                              }}
+                            >
+                              <Box
+                                sx={{
+                                  width: 28,
+                                  height: 28,
+                                  borderRadius: '50%',
+                                  background: isCorrectOption 
+                                    ? 'linear-gradient(135deg, #10b981 0%, #34d399 100%)'
+                                    : isUserOption && !isCorrect
+                                    ? 'linear-gradient(135deg, #ef4444 0%, #f87171 100%)'
+                                    : 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  color: 'white',
+                                  fontWeight: 700,
+                                  fontSize: '0.8rem'
+                                }}
+                              >
+                                {alphabetLabel}
+                              </Box>
+                              <Typography variant="body1" sx={{ flex: 1 }}>
+                                {option}
+                              </Typography>
+                              {isCorrectOption && (
+                                <CheckCircle sx={{ color: '#10b981' }} />
+                              )}
+                              {isUserOption && !isCorrect && (
+                                <Cancel sx={{ color: '#ef4444' }} />
+                              )}
+                            </Box>
+                          )
+                        })}
+                      </Box>
+                      
+                      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+                        <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                          Your Answer: 
+                        </Typography>
+                        {userAnswer ? (
+                          <Chip
+                            label={userAnswer}
+                            sx={{
+                              backgroundColor: isCorrect ? '#10b981' : '#ef4444',
+                              color: 'white',
+                              fontWeight: 600
+                            }}
+                          />
+                        ) : (
+                          <Chip
+                            label="Not answered"
+                            sx={{
+                              backgroundColor: '#6b7280',
+                              color: 'white',
+                              fontWeight: 600
+                            }}
+                          />
+                        )}
+                        <Typography variant="body2" sx={{ fontWeight: 600, ml: 1 }}>
+                          Correct Answer: 
+                        </Typography>
+                        <Chip
+                          label={String.fromCharCode(65 + question.correctAnswer)}
+                          sx={{
+                            backgroundColor: '#10b981',
+                            color: 'white',
+                            fontWeight: 600
+                          }}
+                        />
+                      </Box>
+                    </Card>
+                  )
+                })
+              })()}
+            </Box>
+          </Card>
+        </Box>
       )}
       </Container>
     </Box>

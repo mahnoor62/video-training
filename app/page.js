@@ -119,8 +119,8 @@ export default function Home() {
         }}
       >
         <Typography 
-          variant="h1" 
-          component="h1" 
+          variant="h4" 
+          component="h4" 
           gutterBottom
         //   className="gradient-text"
           sx={{
@@ -130,9 +130,9 @@ export default function Home() {
             mb: 2,
           }}
         >
-          Professional Training Center
+           Enhance your skills with our comprehensive video training program
         </Typography>
-        <Typography 
+        {/* <Typography 
           variant="h5" 
           sx={{ 
             color: '#0f172a',
@@ -143,7 +143,7 @@ export default function Home() {
           }}
         >
           Enhance your skills with our comprehensive video training program
-        </Typography>
+        </Typography> */}
       </Box>
 
       <Grid container spacing={4}>
