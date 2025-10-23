@@ -130,10 +130,10 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
+    <Container maxWidth="lg" sx={{ py: { xs: 2, sm: 4 }, px: { xs: 1, sm: 2 } }}>
       <Box 
         sx={{ 
-          mb: 3,
+          mb: { xs: 2, sm: 3 },
           animation: 'slideInUp 0.6s ease-out',
         }}
       >
@@ -145,8 +145,9 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
           sx={{ 
             mb: 2,
             borderRadius: '12px',
-            padding: '12px 24px',
+            padding: { xs: '8px 16px', sm: '12px 24px' },
             fontWeight: 600,
+            fontSize: { xs: '0.9rem', sm: '1rem' }
           }}
         >
           Back
@@ -154,9 +155,9 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
         
         <Box sx={{ 
           display: 'flex', 
-          // flexDirection: 'column',
-          // alignItems: 'center',
-          gap: 2,
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { xs: 'stretch', sm: 'center' },
+          gap: { xs: 1, sm: 2 },
           mb: 2 
         }}>
           {/* Quiz Assessment Strip - Centered */}
@@ -164,12 +165,12 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
             sx={{
               background: 'linear-gradient(135deg, #e31b23 0%, #333092 100%)',
               borderRadius: '12px',
-              padding: '15px 25px',
+              padding: { xs: '12px 16px', sm: '15px 25px' },
               position: 'relative',
               overflow: 'hidden',
               boxShadow: '0 8px 25px rgba(227, 27, 35, 0.3)',
               width: '100%',
-              maxWidth: '300px',
+              maxWidth: { xs: '100%', sm: '300px' },
               '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -199,7 +200,7 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                 letterSpacing: '-0.02em',
                 position: 'relative',
                 zIndex: 1,
-                fontSize: '1.5rem',
+                fontSize: { xs: '1.2rem', sm: '1.5rem' },
                 textAlign: 'center'
               }}
             >
@@ -211,11 +212,11 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
           <Box sx={{ 
             display: 'flex', 
             alignItems: 'center', 
-            justifyContent: 'flex-end',
-            gap: 2,
+            justifyContent: { xs: 'center', sm: 'flex-end' },
+            gap: { xs: 1, sm: 2 },
             width: '100%',
-            maxWidth: '500px',
-            marginLeft: 'auto'
+            maxWidth: { xs: '100%', sm: '500px' },
+            marginLeft: { xs: 0, sm: 'auto' }
           }}>
             <Chip
               icon={<Quiz />}
@@ -227,8 +228,8 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                 boxShadow: '0 6px 20px rgba(227, 27, 35, 0.4)',
                 borderRadius: '20px',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
-                fontSize: '0.9rem',
-                height: '36px'
+                fontSize: { xs: '0.8rem', sm: '0.9rem' },
+                height: { xs: '32px', sm: '36px' }
               }}
             />
             <Chip
@@ -245,8 +246,8 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                 animation: timeLeft <= 10 ? 'pulse 1s infinite' : 'none',
                 borderRadius: '20px',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
-                fontSize: '0.9rem',
-                height: '36px'
+                fontSize: { xs: '0.8rem', sm: '0.9rem' },
+                height: { xs: '32px', sm: '36px' }
               }}
             />
           </Box>
@@ -270,19 +271,21 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
 
       <Card 
         sx={{ 
-          mb: 4,
+          mb: { xs: 2, sm: 4 },
           animation: 'fadeInScale 0.6s ease-out',
         }}
       >
-        <CardContent sx={{ p: 4 }}>
+        <CardContent sx={{ p: { xs: 2, sm: 4 } }}>
           <Typography 
             variant="h5" 
             component="h2" 
             gutterBottom 
             sx={{ 
-              mb: 4,
+              mb: { xs: 2, sm: 4 },
               fontWeight: 600,
               color: '#0f172a',
+              fontSize: { xs: '1.1rem', sm: '1.5rem' },
+              lineHeight: { xs: 1.4, sm: 1.2 }
             }}
           >
             {currentQuestion.question}
@@ -292,7 +295,7 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
             <RadioGroup
               value={selectedAnswer}
               onChange={handleAnswerChange}
-              sx={{ gap: 2 }}
+              sx={{ gap: { xs: 1, sm: 2 } }}
             >
               {currentQuestion.options.map((option, index) => {
                 const alphabetLabel = String.fromCharCode(65 + index) // A, B, C, D
@@ -310,12 +313,12 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                       backdropFilter: 'blur(10px)',
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       animation: `slideInLeft 0.4s ease-out ${index * 0.1}s both`,
-                        '&:hover': {
-                          borderColor: 'primary.main',
-                          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)',
-                          transform: 'translateY(-2px)',
-                          boxShadow: '0 8px 25px rgba(37, 99, 235, 0.2)',
-                        }
+                      '&:hover': {
+                        borderColor: 'primary.main',
+                        background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)',
+                        transform: { xs: 'none', sm: 'translateY(-2px)' },
+                        boxShadow: { xs: 'none', sm: '0 8px 25px rgba(37, 99, 235, 0.2)' },
+                      }
                     }}
                   >
                     <FormControlLabel
@@ -328,8 +331,8 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                             },
                             '&:before': {
                               content: `"${alphabetLabel}"`,
-                              width: 24,
-                              height: 24,
+                              width: { xs: 20, sm: 24 },
+                              height: { xs: 20, sm: 24 },
                               borderRadius: '50%',
                               background: selectedAnswer === alphabetLabel 
                                 ? 'linear-gradient(135deg, #e31b23 0%, #333092 100%)'
@@ -339,7 +342,7 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                               justifyContent: 'center',
                               color: selectedAnswer === alphabetLabel ? 'white' : '#64748b',
                               fontWeight: 700,
-                              fontSize: '0.9rem',
+                              fontSize: { xs: '0.8rem', sm: '0.9rem' },
                               border: selectedAnswer === alphabetLabel 
                                 ? '2px solid #e31b23' 
                                 : '2px solid #e2e8f0',
@@ -353,14 +356,14 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
                         />
                       }
                       label={
-                        <Typography variant="body1" sx={{ fontWeight: 500, ml: 1 }}>
+                        <Typography variant="body1" sx={{ fontWeight: 500, ml: 1, fontSize: { xs: '0.9rem', sm: '1rem' } }}>
                           {option}
                         </Typography>
                       }
                       sx={{
                         width: '100%',
                         m: 0,
-                        p: 2,
+                        p: { xs: 1.5, sm: 2 },
                         '& .MuiFormControlLabel-label': {
                           width: '100%'
                         }
@@ -374,7 +377,13 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
         </CardContent>
       </Card>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        flexDirection: { xs: 'column', sm: 'row' },
+        gap: { xs: 2, sm: 0 }
+      }}>
         <Button
           variant="outlined"
           onClick={handlePreviousQuestion}
@@ -383,18 +392,25 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
           className="crystal-button crystal-button-secondary"
           sx={{
             opacity: currentQuestionIndex === 0 ? 0.5 : 1,
+            width: { xs: '100%', sm: 'auto' },
+            fontSize: { xs: '0.9rem', sm: '1rem' },
+            padding: { xs: '10px 20px', sm: '12px 24px' }
           }}
         >
           Previous
         </Button>
 
-        <Box sx={{ display: 'flex', gap: 1 }}>
+        <Box sx={{ 
+          display: 'flex', 
+          gap: { xs: 0.5, sm: 1 },
+          order: { xs: -1, sm: 0 }
+        }}>
           {quiz.questions.map((_, index) => (
             <Box
               key={index}
               sx={{
-                width: 12,
-                height: 12,
+                width: { xs: 8, sm: 12 },
+                height: { xs: 8, sm: 12 },
                 borderRadius: '50%',
                 backgroundColor: answers[index] !== undefined ? '#e31b23' : 'grey.300',
                 border: currentQuestionIndex === index ? 2 : 0,
@@ -413,6 +429,9 @@ export default function QuizComponent({ quiz, onComplete, onBack }) {
           className="crystal-button crystal-button-primary"
           sx={{
             opacity: selectedAnswer === '' ? 0.5 : 1,
+            width: { xs: '100%', sm: 'auto' },
+            fontSize: { xs: '0.9rem', sm: '1rem' },
+            padding: { xs: '10px 20px', sm: '12px 24px' }
           }}
         >
           {isLastQuestion ? 'Complete Quiz' : 'Next Question'}

@@ -270,8 +270,8 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
         </CardContent>
       </Card>
 
-      {/* Detailed Results */}
-      <Grid container spacing={2} sx={{ mb: 2 }}>
+      {/* Detailed Results - Commented Out */}
+      {/* <Grid container spacing={2} sx={{ mb: 2 }}>
         {results.map((result, index) => {
           const videoTitle = `Video ${result.videoIndex + 1}: Training Module ${result.videoIndex + 1}`
           const videoScore = Math.round((result.score / result.totalQuestions) * 100)
@@ -350,7 +350,7 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
             </Grid>
           )
         })}
-      </Grid>
+      </Grid> */}
 
       {/* Performance Summary */}
       <Paper 
