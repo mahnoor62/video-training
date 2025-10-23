@@ -273,7 +273,7 @@ export default function ResultsScreen({ results, onNextVideo, onBackToHome }) {
       {/* Detailed Results */}
       <Grid container spacing={2} sx={{ mb: 2 }}>
         {results.map((result, index) => {
-          const videoTitle = `Video${result.videoIndex + 1}:Training Module ${result.videoIndex + 1}`
+          const videoTitle = `Video ${result.videoIndex + 1}: Training Module ${result.videoIndex + 1}`
           const videoScore = Math.round((result.score / result.totalQuestions) * 100)
           
           return (
