@@ -113,8 +113,7 @@ export default function LandingPage({ onStartTraining }) {
               animation: 'slideInUp 0.8s ease-out 0.2s both'
             }}
           >
-             Petrogas E&P Interactive Virtual Training 
-             Start
+             Petrogas E&P Interactive Virtual Training
           </Typography>
 
           {/* <Typography
